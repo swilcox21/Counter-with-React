@@ -12,4 +12,31 @@ import "../styles/index.scss";
 import { Home } from "./component/home.js";
 
 //render your react application
-ReactDOM.render(<Home />, document.querySelector("#app"));
+
+var counter = 0;
+var newCounter;
+function increaseCounter() {
+	counter++;
+	newCounter = "000000" + counter;
+	newCounter = newCounter.slice(-6);
+	console.log(newCounter);
+
+	ReactDOM.render(
+		<Home
+			number1={newCounter.charAt(0)}
+			number2={newCounter.charAt(1)}
+			number3={newCounter.charAt(2)}
+			number4={newCounter.charAt(3)}
+			number5={newCounter.charAt(4)}
+			number6={newCounter.charAt(5)}
+		/>,
+		document.querySelector("#app")
+	);
+	if (newCounter === "000005") {
+		stopCounter();
+	}
+}
+var startCounter = setInterval(increaseCounter, 1000);
+function stopCounter() {
+	clearInterval(startCounter);
+}
